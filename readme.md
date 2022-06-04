@@ -8,5 +8,5 @@
 `docker compose start`
 # Stop Docker Compose
 `docker compose stop`
-# Docker Compose Tutorial Chinese
+# Docker Tutorial Chinese
 [Tutorial](https://github.com/twtrubiks/docker-tutorial) https://github.com/twtrubiks/docker-tutorial
