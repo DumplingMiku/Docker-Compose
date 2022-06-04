@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  rust-desk:
+    container_name: rust-desk
+    ports:
+      - '21115:21115'
+      - '21116:21116'
+      - '21116:21116/udp'
+      - '21118:21118'
+    volumes:
+      - './rust-desk/:/root'
+    network_mode: host
+    command: "hbbs -r <relay-server-ip[:port]>"
+    image: rustdesk/rustdesk-server

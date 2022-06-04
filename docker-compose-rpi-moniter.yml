@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  rpi-monitor:
+    container_name: rpi-monitor
+    restart: always
+    devices:
+      - /dev/vchiq
+      - /dev/vcsm
+    ports:
+      - '8888:8888'
+    volumes:
+      - '/opt/vc:/opt/vc'
+      - '/boot:/boot'
+      - '/sys:/dockerhost/sys:ro'
+      - '/etc:/dockerhost/etc:ro'
+      - '/proc:/dockerhost/proc:ro'
+      - '/usr/lib:/dockerhost/usr/lib:ro'
+    image: 'michaelmiklis/rpi-monitor:latest'

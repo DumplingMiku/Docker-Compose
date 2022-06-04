@@ -1,0 +1,37 @@
+version: '3.1'
+services:
+  url-yourls:
+    container_name: url-yourls
+    restart: always
+    ports:
+      - "80"
+      - "443"
+    environment:
+      YOURLS_DB_HOST: url-mariadb
+      YOURLS_DB_USER: yourls
+      YOURLS_DB_PASS: yourls
+      YOURLS_DB_NAME: yourls
+      YOURLS_SITE: http://example.com
+      YOURLS_USER: test
+      YOURLS_PASS: test
+    volumes:
+      - ./web:/var/www/html/:rw
+    image: yourls
+  url-mariadb:
+    container_name: url-mariadb
+    restart: always
+    environment:
+      MARIADB_USER: yourls
+      MARIADB_PASSWORD: yourls
+      MARIADB_DATABASE: yourls
+      MARIADB_ROOT_PASSWORD: root
+    volumes:
+      - ./db:/var/lib/mysql/:rw
+    image: mariadb
+  url-cloudflare:
+    restart: always
+    container_name: url-cloudflare
+    depends_on:
+      - url-yourls
+    command: "tunnel --no-autoupdate run --token {your-token}"
+    image: cloudflare/cloudflared

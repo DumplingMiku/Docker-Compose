@@ -1,0 +1,26 @@
+version: '3.1'
+services:
+  url-yourls:
+    container_name: url-yourls
+    restart: always
+    environment:
+      YOURLS_DB_HOST: url-mariadb
+      YOURLS_DB_USER: yourls
+      YOURLS_DB_PASS: yourls
+      YOURLS_DB_NAME: yourls
+      YOURLS_SITE: http://example.com
+      YOURLS_USER: test
+      YOURLS_PASS: test
+    volumes:
+      - ./db:/var/lib/mysql/:rw
+      - ./web:/var/www/html/:rw
+    image: yourls
+  url-mariadb:
+    container_name: url-mariadb
+    restart: always
+    environment:
+      MARIADB_USER: yourls
+      MARIADB_PASSWORD: yourls
+      MARIADB_DATABASE: yourls
+      MARIADB_ROOT_PASSWORD: root
+    image: mariadb

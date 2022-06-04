@@ -1,0 +1,8 @@
+version: '2.2'
+services:
+  jmusicbot:
+    container_name: jmusicbot
+    restart: unless-stopped
+    volumes:
+     - ./config:/jmb/config:rw
+    image: craumix/jmusicbot
