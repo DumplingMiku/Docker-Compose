@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  dc-discord-musicbot:
+    image: discord-musicbot:latest
+    container_name: dc-discord-musicbot
+    restart: unless-stopped
+    networks:
+      - lavalink-net
+    depends_on:
+      - dc-lavalink
+    volumes:
+      - ./env/botconfig.js:/usr/src/app/botconfig.js:ro
+
+  dc-lavalink:
+    image: fredboat/lavalink:dev
+    container_name: dc-music-lavalink
+    hostname: lavalink
+    restart: unless-stopped
+    networks:
+      - lavalink-net
+    volumes:
+      - ./env/application.yml:/opt/Lavalink/application.yml:ro
+  dc-cloudflare:
+    restart: always
+    container_name: dc-cloudflare
+    depends_on:
+      - dc-discord-musicbot
+    command: "tunnel --no-autoupdate run --token {your-token}"
+    image: cloudflare/cloudflared
+networks:
+  lavalink-net:
+# You need to image folder download discord-musicbot.tar and input image in docker
+# You need to env/DiscordMusicBot folder download application.yml and botconfig.js then edit it
