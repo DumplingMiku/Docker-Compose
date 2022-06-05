@@ -6,3 +6,5 @@ services:
     volumes:
      - ./config:/jmb/config:rw
     image: craumix/jmusicbot
+# Remember Download Config In env\JmusicBot floder
+# Edit Config and add some parameter

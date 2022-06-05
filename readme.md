@@ -2,6 +2,12 @@
 `curl -fsSL https://get.docker.com/ | sudo sh`
 # Create/Update Docker Compose
 `docker compose up -d`
+# Create Docker Compose with yml
+`docker compose -f xxx.yml up -d`
+
+example `a.yml` in /docker/a
+
+input `docker compose -f /docker/a/a.yml up -d`
 # Remove Docker Compose
 `docker compose down`
 # Start Docker Compose
