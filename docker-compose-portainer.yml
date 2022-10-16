@@ -1,11 +1,18 @@
 version: '3.3'
 services:
-  portainer:
-    ports:
-      - '9000:9000'
+  pt-portainer:
+    container_name: pt-portainer
     restart: always
-    container_name: portainer
+    ports:
+      - "9000"
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - './portainer:/data'
     image: portainer/portainer
+  # pt-cloudflare:
+  #   container_name: pt-cloudflare
+  #   restart: always
+  #   depends_on:
+  #     - pt-portainer
+  #   command: "tunnel --no-autoupdate run --token {your-token}"
+  #   image: cloudflare/cloudflared

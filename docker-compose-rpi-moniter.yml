@@ -7,12 +7,19 @@ services:
       - /dev/vchiq
       - /dev/vcsm
     ports:
-      - '8888:8888'
+      - "8888"
     volumes:
-      - '/opt/vc:/opt/vc'
-      - '/boot:/boot'
-      - '/sys:/dockerhost/sys:ro'
-      - '/etc:/dockerhost/etc:ro'
-      - '/proc:/dockerhost/proc:ro'
-      - '/usr/lib:/dockerhost/usr/lib:ro'
-    image: 'michaelmiklis/rpi-monitor:latest'
+      - /opt/vc:/opt/vc
+      - /boot:/boot
+      - /sys:/dockerhost/sys:ro
+      - /etc:/dockerhost/etc:ro
+      - /proc:/dockerhost/proc:ro
+      - /usr/lib:/dockerhost/usr/lib:ro
+    image: michaelmiklis/rpi-monitor:latest
+  # url-cloudflare:
+  #   restart: always
+  #   container_name: rpi-cloudflare
+  #   depends_on:
+  #     - rpi-monitor
+  #   command: "tunnel --no-autoupdate run --token {your-token}"
+  #   image: cloudflare/cloudflared

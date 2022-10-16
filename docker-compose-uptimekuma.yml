@@ -1,10 +1,17 @@
 version: '3.3'
 services:
-  uptime-kuma:
+  up-uptime-kuma:
     container_name: uptime-kuma
     restart: always
     ports:
-      - '3001:3001'
+      - "3001"
     volumes:
       - './data:/app/data'
     image: 'louislam/uptime-kuma'
+  # up-cloudflare:
+  #   container_name: up-cloudflare
+  #   restart: always
+  #   depends_on:
+  #     - up-uptime-kuma
+  #   command: "tunnel --no-autoupdate run --token {your-token}"
+  #   image: cloudflare/cloudflared
