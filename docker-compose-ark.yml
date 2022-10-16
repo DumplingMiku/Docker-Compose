@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  ark-client:
+    image: mbround18/ark-manager-client:latest
+    platform: linux/amd64
+    pull_policy: IfNotPresent
+    entrypoint: ["/bin/sh"]
+  ark-manager-web:
+    ports:
+      - '8000:8000'
+      - '32330:32330'
+      - '7777:7777/tcp'
+      - '7777:7777/udp'
+      - '7778:7778/tcp'
+      - '7778:7778/udp'
+      - '27016:27016/tcp'
+      - '27016:27016/udp'
+    volumes:
+      - './ark:/home/steam/ARK'
+      - './config:/etc/arkmanager/'
+    image: 'mbround18/ark-manager-web:latest'
