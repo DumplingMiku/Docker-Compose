@@ -28,7 +28,7 @@ services:
       - mrss-mongo
     environment:
       - DRSS_START=bot
-      - DRSS_BOT_TOKEN=OTgwNzcyMjgyOTI0NDI5Mzc0.GD961C.PuiEcLCSMEuvdDlZM4e1MUTyOjNP3ExBjwKhY8
+      - DRSS_BOT_TOKEN=
       - DRSS_DATABASE_URI=mongodb://mrss-mongo:27017/rss
   mrss-web:
     container_name: mrss-web-container
@@ -44,12 +44,12 @@ services:
       #- "8081"
     environment:
       - DRSS_START=web
-      - DRSSWEB_BOT_TOKEN=OTgwNzcyMjgyOTI0NDI5Mzc0.GD961C.PuiEcLCSMEuvdDlZM4e1MUTyOjNP3ExBjwKhY8
+      - DRSSWEB_BOT_TOKEN=
       - DRSSWEB_DATABASE_REDIS=redis://mrss-redis:6379
       - DRSSWEB_DATABASE_URI=mongodb://mrss-mongo:27017/rss
-      - DRSSWEB_BOT_REDIRECTURI=https://dcrss.kimcloud.ml/authorize
-      - DRSSWEB_BOT_CLIENTID=980772282924429374
-      - DRSSWEB_BOT_CLIENTSECRET=Riv4saYze56BA5a4oYUCTE7Fc19TMnk8
+      - DRSSWEB_BOT_REDIRECTURI=
+      - DRSSWEB_BOT_CLIENTID=
+      - DRSSWEB_BOT_CLIENTSECRET=
   # mrss-cloudflare:
   #   restart: always
   #   container_name: mrss-cloudflare
