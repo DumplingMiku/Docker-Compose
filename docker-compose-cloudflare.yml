@@ -1,9 +1,12 @@
-version: '3.3'
 services:
   cloudflare:
     restart: always
     container_name: cloudflare
-    depends_on:
-      - container_name
-    command: "tunnel --no-autoupdate run --token {your-token}"
+    networks:
+      - cf
+    command: "tunnel --no-autoupdate run --token {token}}"
     image: cloudflare/cloudflared
+networks:
+  cf:
+    name: cf
+    external: false

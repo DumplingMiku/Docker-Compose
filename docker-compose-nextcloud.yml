@@ -1,0 +1,24 @@
+version: '3'
+services:
+  nextcloud:
+    container_name: nextcloud
+    restart: always
+    image: nextcloud:latest
+    volumes:
+      - ./nextcloud/web:/var/www/html:rw
+    ports:
+      - "80:80"
+  # onlyoffice:
+  #   container_name: onlyoffice
+  #   restart: always
+  #   image: onlyoffice/documentserver
+  #   volumes:
+  #     - ./onlyoffice/data:/var/www/onlyoffice/Data:rw
+  #     - ./onlyoffice/logs:/var/log/onlyoffice:rw
+  #   environment:
+  #     - JWT_ENABLED=true
+  #     - JWT_SECRET=GzoZjAPAUuPx7CXhAZF4
+  #     - JWT_HEADER=Authorization
+  #     - JWT_IN_BODY=true
+  #   ports:
+  #     - "81:80"
