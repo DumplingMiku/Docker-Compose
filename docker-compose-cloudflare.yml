@@ -2,9 +2,11 @@ services:
   cloudflare:
     restart: always
     container_name: cloudflare
+    environment:
+      - token=
     networks:
       - cf
-    command: "tunnel --no-autoupdate run --token {token}}"
+    command: "tunnel --no-autoupdate run --token ${token}}"
     image: cloudflare/cloudflared
 networks:
   cf:
