@@ -50,7 +50,7 @@ services:
   #     - dc-discord-musicbot
   #   networks:
   #     - lavalink-net
-  #   command: "tunnel --no-autoupdate run --token eyJhIjoiOTI3OTg4YzE5ZmE0YzJhMDc3MTAzZWNiZThhM2JmZWQiLCJ0IjoiZDA4ZWIxOWMtYTQzZC00NDc5LWE0NTYtYTdlNTQzNGE1MDEwIiwicyI6Ik0yUXlaV0ZqT0RjdE1HVTRZeTAwWm1OaExUZzFPVEl0TnpoalpqTmpOMk5oTTJJeiJ9"
+  #   command: "tunnel --no-autoupdate run --token {token}}"
   #   image: cloudflare/cloudflared
 networks:
   # cf:
