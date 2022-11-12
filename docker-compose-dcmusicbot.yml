@@ -2,17 +2,39 @@ version: "3"
 
 services:
   dc-discord-musicbot:
-    image: chongzhijie/sudhanplayz-discord-musicbot-master
+    image: dumplingmiku/sudhanplayz-discord-musicbot-master
     container_name: dc-discord-musicbot
     restart: unless-stopped
+    # network_mode: cf
     networks:
       - lavalink-net
-    depends_on:
-      - dc-lavalink
+      # - cf
+    environment:
+    #ip=your lavalink ip default:lavalink.oops.wtf
+      - ip=lavalink.oops.wtf
+    #port=your lavalink port default:2000
+      - port=2000
     volumes:
       - ./env/botconfig.js:/usr/src/app/botconfig.js:ro
 
+  dc-discord-musicbot-v5:
+    image: dumplingmiku/sudhanplayz-discord-musicbot-v5
+    container_name: dc-discord-musicbot-v5
+    restart: unless-stopped
+    # network_mode: cf
+    networks:
+      - lavalink-net
+      # - cf
+    environment:
+    #ip=your lavalink ip default:lavalink.oops.wtf
+      - ip=lavalink.oops.wtf
+    #port=your lavalink port default:2000
+      - port=2000
+    volumes:
+      - ./env/config.js:/usr/src/app/config.js:ro
+
   dc-lavalink:
+    # image: chongzhijie/lavalink
     image: fredboat/lavalink:e892afe
     container_name: dc-music-lavalink
     hostname: lavalink
@@ -26,9 +48,13 @@ services:
   #   container_name: dc-cloudflare
   #   depends_on:
   #     - dc-discord-musicbot
-  #   command: "tunnel --no-autoupdate run --token {your-token}"
+  #   networks:
+  #     - lavalink-net
+  #   command: "tunnel --no-autoupdate run --token eyJhIjoiOTI3OTg4YzE5ZmE0YzJhMDc3MTAzZWNiZThhM2JmZWQiLCJ0IjoiZDA4ZWIxOWMtYTQzZC00NDc5LWE0NTYtYTdlNTQzNGE1MDEwIiwicyI6Ik0yUXlaV0ZqT0RjdE1HVTRZeTAwWm1OaExUZzFPVEl0TnpoalpqTmpOMk5oTTJJeiJ9"
   #   image: cloudflare/cloudflared
 networks:
+  # cf:
+  #   name: cf
+  #   external: true
   lavalink-net:
-# You need to image folder download discord-musicbot.tar and input image in docker
-# You need to env/DiscordMusicBot folder download application.yml and botconfig.js then edit it
+    name: lavalink
