@@ -33,16 +33,16 @@ services:
     volumes:
       - ./env/config.js:/usr/src/app/config.js:ro
 
-  dc-lavalink:
-    # image: chongzhijie/lavalink
-    image: fredboat/lavalink:e892afe
-    container_name: dc-music-lavalink
-    hostname: lavalink
-    restart: unless-stopped
-    networks:
-      - lavalink-net
-    volumes:
-      - ./env/application.yml:/opt/Lavalink/application.yml:ro
+  # dc-lavalink:
+  #   # image: chongzhijie/lavalink
+  #   image: fredboat/lavalink:e892afe
+  #   container_name: dc-music-lavalink
+  #   hostname: lavalink
+  #   restart: unless-stopped
+  #   networks:
+  #     - lavalink-net
+  #   volumes:
+  #     - ./env/application.yml:/opt/Lavalink/application.yml:ro
   # dc-cloudflare:
   #   restart: always
   #   container_name: dc-cloudflare
