@@ -19,6 +19,9 @@ input `docker compose -f /docker/a/a.yml up -d`
 # Docker compose update shell
 `curl -O https://raw.githubusercontent.com/DumplingMiku/docker-compose/master/auto_update_docker.sh`
 
+if error this script , please run the cmd
+`dos2unix ./auto_update_docker.sh`
+
 Print all floder path
 
 `ls -d $PWD/*`
