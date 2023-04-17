@@ -2,8 +2,6 @@ server_name=
 # example server_name=test
 dir_path=
 # example dir_path= /mnt/a
-dir=()
-# example dir=(a a1 a2 a3)
 
 gotify=false
 gotify_url=
@@ -16,6 +14,9 @@ discord_webhook=
 # example discord_webhook=https://discord.com/api/webhooks/#/#
 discord_server_icon=
 # example discord_server_icon=https://www.testedtechnology.co.uk/wp-content/uploads/2020/12/UnRAID-Icon-201x201.png
+
+cd $dir_path
+dir=($(ls -d */))
 
 # start
 now_time=$(date +"%F %T")
