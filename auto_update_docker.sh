@@ -2,6 +2,9 @@ server_name=
 # example server_name=test
 dir_path=
 # example dir_path= /mnt/a
+cd $dir_path
+dir=($(ls -d */))
+# example dir=(a b c d) default:($(ls -d */)) it scan all dir
 
 gotify=false
 gotify_url=
@@ -15,8 +18,11 @@ discord_webhook=
 discord_server_icon=
 # example discord_server_icon=https://www.testedtechnology.co.uk/wp-content/uploads/2020/12/UnRAID-Icon-201x201.png
 
-cd $dir_path
-dir=($(ls -d */))
+telegram=false
+telegram_bot_token=
+# example telegram_bot_token=xxxx:xxxxxxxxxxxxxxxxxxxx
+telegram_user_id=
+# example telegram_user_id=telegram_user_id
 
 # start
 now_time=$(date +"%F %T")
@@ -34,16 +40,25 @@ curl -H "Content-Type: application/json" \
     "icon_url": "'"$discord_server_icon"'"
     },
     "color": 13043755,
-    "description": ":desktop::'"$server_name"' \n :clock3::'"$now_time"' \n :red_circle: Start update docker :warning: "
+    "description": "💻:'"$server_name"' \n 🕒:'"$now_time"' \n 🔴 Start update docker ⚠ "
   }]
 }' \
 "$discord_webhook"
 fi
 
 if [ "$gotify" = "true" ]; then
-    curl "$gotify_url/message?token=$gotify_token" -F "title=Docker_update_bot" -F "message= Server:$server_name Start update docker. time: $now_time" -F "priority=5"
+    curl "$gotify_url/message?token=$gotify_token" \
+        -F "title=Docker_update_bot" \
+        -F "message= 💻:$server_name 🔴 Start update docker. ⚠ 🕒: $now_time" \
+        -F "priority=5"
 fi
 
+if [ "$telegram" = "true" ]; then
+    curl -X POST \
+        -H 'Content-Type: application/json' \
+        -d '{"chat_id": "'"$telegram_user_id"'", "text": "💻:'"$server_name"' \n 🕒:'"$now_time"' \n 🔴 Start update docker ⚠ ", "disable_notification": true}' \
+        "https://api.telegram.org/bot$telegram_bot_token/sendMessage"
+fi
 # body
 
 for x in ${dir[@]}; do
@@ -62,16 +77,24 @@ for x in ${dir[@]}; do
             "icon_url": "'"$discord_server_icon"'"
             },
         "color": 15564090,
-        "description": ":desktop::'"$server_name"' \n :clock3::'"$now_time"' \n :brown_circle: Now Updating: '"$x"'"
+        "description": "💻:'"$server_name"' \n 🕒:'"$now_time"' \n 🟠 Now Updating: '"$x"'"
     }]
     }' \
     "$discord_webhook"
     fi
 
     if [ "$gotify" = "true" ]; then
-        curl "$gotify_url/message?token=$gotify_token" -F "title=Docker_update_bot" -F "message= Server:$server_name Now Updating: $x. time: $now_time " -F "priority=5"
+        curl "$gotify_url/message?token=$gotify_token" \
+            -F "title=Docker_update_bot" \
+            -F "message= 💻:$server_name 🟠 Now Updating: $x. 🕒: $now_time " \
+            -F "priority=5"
     fi
-
+    if [ "$telegram" = "true" ]; then
+        curl -X POST \
+            -H 'Content-Type: application/json' \
+            -d '{"chat_id": "'"$telegram_user_id"'", "text": "💻:'"$server_name"' \n 🕒:'"$now_time"' \n 🟠 Now Updating: '"$x"'", "disable_notification": true}' \
+            "https://api.telegram.org/bot$telegram_bot_token/sendMessage"
+    fi
     up_docker_dir=$dir_path/${x}
     cd "$up_docker_dir"
     docker compose pull
@@ -94,12 +117,30 @@ curl -H "Content-Type: application/json" \
         "icon_url": "'"$discord_server_icon"'"
         },
     "color": 3129201, 
-    "description": ":desktop::'"$server_name"' \n :clock3::'"$now_time"' \n :green_circle: All Docker update done. :white_check_mark: "
+    "description": "💻:'"$server_name"' \n 🕒:'"$now_time"' \n 🟢 All Docker update done. ☑"
   }]
 }' \
 "$discord_webhook"
 fi
 
 if [ "$gotify" = "true" ]; then
-    curl "$gotify_url/message?token=$gotify_token" -F "title=Docker_update_bot" -F "message= Server:$server_name All Docker update done. time: $now_time" -F "priority=5"
+    curl "$gotify_url/message?token=$gotify_token" \
+        -F "title=Docker_update_bot" \
+        -F "message= 💻:$server_name 🟢All Docker update done☑. 🕒: $now_time" \
+        -F "priority=5"
 fi
+
+if [ "$telegram" = "true" ]; then
+    curl -X POST \
+        -H 'Content-Type: application/json' \
+        -d '{"chat_id": "'"$telegram_user_id"'", "text": "💻:'"$server_name"' \n 🕒:'"$now_time"' \n 🟢 All Docker update done. ☑", "disable_notification": true}' \
+        "https://api.telegram.org/bot$telegram_bot_token/sendMessage"
+fi
+
+# 🔴
+# 🟠
+# 🟢
+# 💻
+# ☑
+# 🕒
+# ⚠
