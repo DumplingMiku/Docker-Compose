@@ -117,7 +117,7 @@ curl -H "Content-Type: application/json" \
         "icon_url": "'"$discord_server_icon"'"
         },
     "color": 3129201, 
-    "description": "💻:'"$server_name"' \n 🕒:'"$now_time"' \n 🟢 All Docker update done. ☑"
+    "description": "💻:'"$server_name"' \n 🕒:'"$now_time"' \n 🟢 All Docker update done. ✅"
   }]
 }' \
 "$discord_webhook"
@@ -126,14 +126,14 @@ fi
 if [ "$gotify" = "true" ]; then
     curl "$gotify_url/message?token=$gotify_token" \
         -F "title=Docker_update_bot" \
-        -F "message= 💻:$server_name 🟢All Docker update done☑. 🕒: $now_time" \
+        -F "message= 💻:$server_name 🟢All Docker update done✅. 🕒: $now_time" \
         -F "priority=5"
 fi
 
 if [ "$telegram" = "true" ]; then
     curl -X POST \
         -H 'Content-Type: application/json' \
-        -d '{"chat_id": "'"$telegram_user_id"'", "text": "💻:'"$server_name"' \n 🕒:'"$now_time"' \n 🟢 All Docker update done. ☑", "disable_notification": true}' \
+        -d '{"chat_id": "'"$telegram_user_id"'", "text": "💻:'"$server_name"' \n 🕒:'"$now_time"' \n 🟢 All Docker update done. ✅", "disable_notification": true}' \
         "https://api.telegram.org/bot$telegram_bot_token/sendMessage"
 fi
 
@@ -141,6 +141,6 @@ fi
 # 🟠
 # 🟢
 # 💻
-# ☑
+# ✅
 # 🕒
 # ⚠
