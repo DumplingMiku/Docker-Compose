@@ -40,8 +40,7 @@ services:
       - mrss-redis
       - mrss-mongo
     ports:
-      - "8081:8081"
-      #- "8081"
+      # - "8081:8081"
     environment:
       - DRSS_START=web
       - DRSSWEB_BOT_TOKEN=
@@ -50,12 +49,6 @@ services:
       - DRSSWEB_BOT_REDIRECTURI=
       - DRSSWEB_BOT_CLIENTID=
       - DRSSWEB_BOT_CLIENTSECRET=
-  # mrss-cloudflare:
-  #   restart: always
-  #   container_name: mrss-cloudflare
-  #   depends_on:
-  #     - mrss-web
-  #   command: "tunnel --no-autoupdate run --token {your-token}"
-  #   image: cloudflare/cloudflared
+
 volumes:
   db-data:

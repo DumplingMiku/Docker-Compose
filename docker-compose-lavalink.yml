@@ -3,8 +3,8 @@ services:
   lavalink:
     container_name: lavalink
     restart: restart
-    ports:
-      - "2333:2333"
+    # ports:
+    #   - "2333:2333"
     volumes:
       - ./application.yml:/opt/Lavalink/application.yml:ro
     image: chongzhijie/lavalink

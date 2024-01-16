@@ -3,6 +3,6 @@ services:
   kms-server:
     container_name: kms
     restart: always
-    ports:
-      - "1688:1688"
+    # ports:
+    #   - "1688:1688"
     image: luodaoyi/kms-server:latest
