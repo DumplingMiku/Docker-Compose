@@ -1,0 +1,11 @@
+version: 3
+services:
+  filebrowser:
+    container_name: filebrowser
+    image: filebrowser/filebrowser
+    volumes:
+      - ./filebrowser/to/root:/srv 
+      - ./filebrowser/filebrowser.db:/database.db 
+      - ./filebrowser/filebrowser.json:/.filebrowser.json 
+    ports:
+      - "8080:80"
